@@ -3,9 +3,9 @@ package v1;
 public class Boat 
 {
 	private int size; //cette ligne crée l'attribut taille
-	private int debut_X, debut_Y;
-	private int fin_X, fin_Y;
-	private boolean etat[];
+	private int debut_X, debut_Y; //case de début
+	private int fin_X, fin_Y; //case de fin
+	private boolean etat[]; //vecteur qui donne l'etat du bateau 1=neuf 0=touché
 	Boat(int size, int debut_X, int debut_Y, int fin_X, int fin_Y)
 	{
 		this.size = size;
