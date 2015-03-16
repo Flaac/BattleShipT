@@ -2,7 +2,7 @@ package v1;
 
 public class Boat 
 {
-	private int size;
+	private int size; //cette ligne crée l'attribut taille
 	private int debut_X, debut_Y;
 	private int fin_X, fin_Y;
 	private boolean etat[];
