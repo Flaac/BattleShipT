@@ -7,17 +7,20 @@ import javax.swing.*;
 public class Button extends JButton 
 {
 	private int ID;
-	Button(int ID)
+	private Plateau p;
+	Button(Plateau p, int ID)
 	{
 		super(Integer.toString(ID));
 		this.setPreferredSize(new Dimension(20,20));
 		this.ID = ID;
+		this.p = p;
 	}
-	Button(int ID, int size)
+	Button(Plateau p, int ID, int size)
 	{
 		super(Integer.toString(ID));
 		this.setPreferredSize(new Dimension(size,size));
 		this.ID = ID;
+		this.p = p;
 	}
 	
 	public int getID()
