@@ -152,4 +152,71 @@ public int getPlateau(int x, int y)
 System.out.println("Essai");
 return CASES[x][y];
 }
+
+/* A partir d'ici ce sont des méthodes que j'ai rajouté pour que mon code compile mais qui seront enlevées
+par la suite quand tu auras fini de tout coder 
+Normalement elle ne rentre pas en conflit avec ce que tu as fait
+Si jamais c'était le cas, met mes fonctions en commentaire
+---Flac---
+*/
+
+static private int compteur=0; //Variable qui compte le nombre de plateau créé en tout
+private int ID;			//Identité du plateau
+	
+Plateau()
+{
+	ID = compteur;
+	compteur++;
+}
+	public void init(int ligne, int colonne)
+	{
+		this.ligne = ligne;
+		this.colonne = colonne;
+		matrice = new int[ligne][colonne];
+		for(int i=0;i<ligne;i++)
+		{
+			for(int j=0;j<colonne;j++)
+			{
+				matrice[i][j] = 0;
+			}		
+		}
+	}
+	
+	public void preInit(MainWindow fen)
+	{
+		this.fen = fen;
+	}
+	
+	public void placer_bateau(int[] taille_bateau, Vector<Integer> case_occupees)
+	{
+		int l = case_occupees.size();
+		for(int i=0;i<l;i++)
+		{
+			int j = case_occupees.get(i)%8;
+			int k = case_occupees.get(i) - j;k/=8;
+			matrice[k][j]=2;
+			fen.refresh(ID,k,j);
+		}
+		for(int i=0;i<8;i++)
+		{
+			for(int j=0;j<8;j++)
+			{
+				fen.debut_de_partie();
+			}
+		}
+		
+	}
+	
+	/*
+	public void jouer(int N)
+	{
+		int j = N%ligne;
+		int i = N - j; i/=colonne;
+		if(matrice[i][j]==0)
+		{
+			matrice[i][j]=1;
+		}
+		fen.refresh(ID,i,j);
+	}
+	*/
 }
