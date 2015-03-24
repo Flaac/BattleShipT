@@ -1,0 +1,111 @@
+import java.awt.Graphics;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+
+
+
+
+public class Plateau extends JFrame {
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu fichier = new JMenu("Fichier");
+	private JMenu partie = new JMenu("Partie");
+	
+	private JMenuItem quitter = new JMenuItem("Quitter la partie");
+	private JMenuItem newgame = new JMenuItem("Nouvelle partie");
+	private JMenuItem restart = new JMenuItem("Recommencer la partie");
+	private JMenuItem apropos = new JMenuItem("A propos");
+	private JMenuItem surprise = new JMenuItem("Surprise !");
+	
+	private Commentaires comment = new Commentaires("Ici un commentaire");
+	
+public Plateau(){
+	this.setTitle("Plateau de jeu");
+	this.setExtendedState(this.MAXIMIZED_BOTH); //adapter la taille de la fenêtre à l'écran
+	this.setLocationRelativeTo(null);
+	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Mettre fin à l'application à la fermeture de la fenêtre
+	
+	this.fichier.add(quitter);
+	this.fichier.add(apropos);
+	this.partie.add(newgame);
+	this.partie.add(restart);
+	this.partie.add(surprise);
+	
+	this.menuBar.add(fichier);
+	this.menuBar.add(partie);
+	this.setJMenuBar(menuBar);
+	
+	newgame.addActionListener(new MenuListener());
+	apropos.addActionListener(new Menu2Listener());
+	surprise.addActionListener(new Menu3Listener());
+	
+	JPanel p=new JPanel();
+	this.setContentPane(p);
+	p.setLayout(new BoxLayout(p, BoxLayout.PAGE_AXIS));
+	
+	GridLayout g=new GridLayout();
+	g.setColumns(6);
+	g.setRows(6);
+	
+	JPanel p1=new JPanel();
+	p1.setLayout(g);
+	for(int i=1; i<=36;i++){
+		JButton bouton=new JButton();
+		String j=new String();
+		j=j.valueOf(i);
+		bouton.setText(j);
+		p1.add(bouton);
+		}
+	
+	JPanel p2=new JPanel();
+	p2.setLayout(g);
+	for(int k=1; k<=36;k++){
+		JButton bouton1=new JButton();
+		String l=new String();
+		l=l.valueOf(k);
+		bouton1.setText(l);
+		p2.add(bouton1);
+			}
+	
+	JPanel p3=new JPanel();
+	p3.setLayout((new BoxLayout(p3, BoxLayout.LINE_AXIS)));
+	p3.add(p1);
+	p3.add(p2);
+	
+	p.add(p3);
+	p.add(comment);
+	
+	this.setVisible(true);
+	
+}
+
+class MenuListener implements ActionListener{
+	public void actionPerformed(ActionEvent arg0){
+		comment.setcomment("Nouvelle Partie");
+		}
+}
+
+class Menu2Listener implements ActionListener{
+	public void actionPerformed(ActionEvent arg0){
+		comment.setcomment("A propos");
+		}
+}
+
+class Menu3Listener implements ActionListener{
+	public void actionPerformed(ActionEvent arg0){
+		Surprise surprise=new Surprise();
+		}
+}
+}
+
