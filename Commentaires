@@ -1,0 +1,18 @@
+
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Commentaires extends JLabel{
+	private String commentaire;
+	Commentaires(String str){
+		this.setText(str);
+		commentaire=str;
+	}
+	
+	
+	public void setcomment(String str1){
+		this.setText(str1);
+		commentaire=str1;
+	}
+}
