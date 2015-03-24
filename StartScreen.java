@@ -10,7 +10,7 @@ public class StartScreen extends JPanel {
 	private JButton nouveau_jeu=new JButton("Start Game");
 	public StartScreen(JFrame f){
 		super();
-		this.nouveau_jeu.addActionListener(new StartGame(f,new Jeu()));
+		this.nouveau_jeu.addActionListener(new chgScr(f,new Jeu()));
 		setLayout(new BorderLayout());
 		JLabel image = new JLabel(new ImageIcon("titre.jpeg") );
 		JLabel ct = new JLabel("© C. ABGRALL, R. CABALL, A. KIRCHER, B. LOLLIVIER - 2015");
