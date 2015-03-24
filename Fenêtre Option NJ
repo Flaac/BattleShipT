@@ -1,0 +1,47 @@
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+
+
+
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Option extends JFrame {
+	private JPanel container= new JPanel();
+	private JComboBox bateaux =new JComboBox();
+	private JTextField plateau= new JTextField();
+	private JLabel label1=new JLabel("Nombre de bateaux");
+	private JLabel label2=new JLabel("Taille du plateau (entier entre 5 et 10)");
+	
+	
+	public Option(){
+		this.setTitle("Option de jeu");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(500, 100);
+		container.setBackground(Color.CYAN);
+		bateaux.setPreferredSize(new Dimension(200,40));
+		
+		bateaux.addItem("2");
+		bateaux.addItem("3");
+		bateaux.addItem("4");
+		
+		container.add(label1);
+		container.add(bateaux);
+		container.add(label2);
+		container.add(plateau);
+		
+		GridLayout h=new GridLayout();
+		h.setColumns(2);
+		h.setRows(2);
+		container.setLayout(h);
+		this.setContentPane(container);
+		this.setVisible(true);
+	}
+}
