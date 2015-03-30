@@ -1,65 +1,26 @@
 package v1;
 
+import java.util.Vector;
+
 public class Plateau
 {
-//private int ESSAIS[][]; //matrice qui donne les cases essayées '1=essayé'
-//private int BATEAUX[][]; //matrice qui stocke la localisation des bateaux '1=bout de bateau'
-//private int MER [][]; //matrice qui donne les emplacements de la mer -> si vide me jeu est fini et si touché la case redevient de la mer
 private int CASES[][]; //matrice qui donne l'etat des cases '0 = mer non essayée' '1 = mer essayée' '2 = bateau non essayé' '3 = bateau essayé'
 private int nbligne;
 private int nbcolonne;
 private Boat bateaux []; //crée le vecteur de bateaux qui stocke les bateaux
+private int fin; //si 'fin=nombre de bateaux', alors tous les bateaux sont coulés
 Plateau(int nbligne, int nbcolonne)
 {
 this.nbligne = nbligne;
 this.nbcolonne = nbcolonne;
 CASES = new int[nbligne][nbcolonne]; //initialisation de la matrice bateaux
-bateaux = new Boat[13]; //initialisation de la matrice bateaux (13 utilisé par la suite)
+bateaux = new Boat[1]; //initialisation de la matrice bateaux (13 utilisé par la suite)
 Boat bateau1 = new Boat(4,1,2,2,"Titanic");
 for (int i=0;i<bateau1.getSize();i++)
 	{
 	CASES [bateau1.get_xDebut()+i*bateau1.getDirection()] [bateau1.get_yDebut()+i*(1-bateau1.getDirection())]=2;
 	}
-
-/*for(int i=0;i<nbligne;i++)
-{
-	for(int j=0;j<nbcolonne;j++)
-	{
-		CASES[i][j] = 0;
-		for(int m=0;m<bateaux.length;m++)
-		{
-		CASES [bateaux[m].get_xDebut()+i*bateaux[m].getDirection()] [bateaux[m].get_yDebut()+i*(1-bateaux[m].getDirection())]=2;
-		}
-	}
-}*/
-
-/*ESSAIS = new int[nbligne][nbcolonne]; //initialisation de la matrice ESSAIS
-for(int i=0;i<nbligne;i++)
-{
-for(int j=0;j<nbcolonne;j++)
-{
-ESSAIS[i][j] = 0;
-}
-}
-BATEAUX = new int[nbligne][nbcolonne]; //initialisation de la matrice bateaux
-for(int i=0;i<nbligne;i++)
-{
-for(int j=0;j<nbcolonne;j++)
-{
-BATEAUX[i][j] = 0;
-}
-}
-Boat bateau1 = new Boat(4,1,2,2,"Titanic");
-for (int i=0;i<bateau1.getSize();i++)
-{BATEAUX [bateau1.get_xDebut()+i*bateau1.getDirection()] [bateau1.get_yDebut()+i*(1-bateau1.getDirection())]=1;} //On incrémente l'abscisse si horizontal et l'ordonnée si vertical, pour remplir la matrice
-MER = new int[nbligne][nbcolonne]; //initialisation de la matrice MER
-for(int i=0;i<nbligne;i++)
-{
-for(int j=0;j<nbcolonne;j++)
-{
-MER[i][j] = 0;
-}
-}*/
+bateaux[0]=bateau1; //le bateau1 est un test
 }
 
 public void add_boat (Boat b) //ajoute un bateau sur le plateau erreur si deux bateaux sont au même endroit
@@ -110,11 +71,13 @@ if(CASES[i][j]==2)
 	CASES[i][j]=3;
 	System.out.println(Integer.toString(CASES[i][j]));
 	System.out.println("Touché !");
-	for(int p=0;p>bateaux.length;p++) //but de la double-boucle : chercher quel bateau a été touché
+	for(int p=0;p<bateaux.length;p++) //but de la double-boucle : chercher quel bateau a été touché
 		{
-		for (int k=0;k<bateaux[p].getSize();k++)
+		Boat b = bateaux[p];
+		int s = b.getSize();
+		for (int k=0;k<s;k++)
 		{
-		if(((bateaux[p].get_xDebut()+k*bateaux[p].getDirection())*j+(bateaux[p].get_yDebut()+k*(1-bateaux[p].getDirection()))*i)==N)
+		if((b.get_xDebut()+k*(1-b.getDirection()))==j & (b.get_yDebut()+k*(b.getDirection()))==i) //testé et approuvé
 			{
 			String n = bateaux[p].getNom();
 			System.out.println("Vous avez touché le bateau : "+n);
@@ -122,30 +85,30 @@ if(CASES[i][j]==2)
 			int h=0;
 			for (int f=0;f<bateaux[p].getSize();f++) //déterminer si tout les bouts du bateau sont touchés
 				{
-				boolean test[];
-				test = new boolean[bateaux[p].getSize()];
-				boolean t = bateaux[p].getEtat()[f];
-				//h=h+t; //on peut considérer que true = 1?
+				boolean t = bateaux[p].getEtat()[f]; //l'etat 1 est l'état coulé
+				if (t== true)
+					{h=h+1;}
 				}
-			if (h==bateaux[p].getSize())
-				{}
-			//arrêter la boucle
+			if (h==bateaux[p].getSize()) //alors le bateau est coulé
+				{
+				bateaux[p].setCoule();
+				System.out.println("Vous avez coulé le bateau : "+n);
+				fin = fin+1;
+				if (fin==bateaux.length)
+						{
+						System.out.println("Tous les bateaux ont été coulés");
+						//enchainer sur la fin su jeu
+						}
+				}
+				System.out.println("A l'adversaire");
+				}
+			//passer à l'autre joueur
 			}
 		}
 		}
 	
 }
 
-/*if(MER[i][j]==1) //si il y a quelque chose sur la mer
-{
-System.out.println("Touché");
-System.out.println(Integer.toString(MER[i][j]));
-MER[i][j]=0; //on l'enlève
-System.out.println(Integer.toString(MER[i][j]));
-//il faut pouvoir remonter au bateau et vérifier si il est encore la -> touché ou coulé (par le nom)
-
-}*/
-}
 
 public int getPlateau(int x, int y)
 {
@@ -159,7 +122,7 @@ Normalement elle ne rentre pas en conflit avec ce que tu as fait
 Si jamais c'était le cas, met mes fonctions en commentaire
 ---Flac---
 */
-
+/*
 static private int compteur=0; //Variable qui compte le nombre de plateau créé en tout
 private int ID;			//Identité du plateau
 	
