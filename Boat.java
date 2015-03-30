@@ -1,14 +1,12 @@
 package v1;
-
 public class Boat
 {
 private int size; //cette ligne crée l'attribut taille
 private int debut_X, debut_Y; //case de début
 private int direction; //donne la direction du bateau 'horizontal = 1' 'vertical=0' erreur si direction différent de 0 ou 1
 private boolean etat[]; //vecteur qui donne l'etat des cases du bateau bateau 0=neuf 1=touché
-private boolean coule; //0=neuf 1=coulé
+private boolean coule; //0=vivant 1=coulé
 private String nom;
-
 Boat(int size, int direction, int debut_X, int debut_Y, String nom)
 {
 	this.size = size;
@@ -19,8 +17,9 @@ Boat(int size, int direction, int debut_X, int debut_Y, String nom)
 	etat = new boolean[size];
 	for(int i=0;i<size;i++)
 	{
-		etat[i] = true;
+		etat[i] = false;
 	}
+	this.coule = false;
 }
 public int getSize()
 {
@@ -51,9 +50,9 @@ public boolean[] getEtat()
 {
 	return etat;
 }
-void setCoule(boolean i)
+void setCoule()
 {
-	coule=i;
+	coule=true;
 }
 void setEtat(int j, boolean i)
 {
