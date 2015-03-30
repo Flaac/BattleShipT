@@ -4,20 +4,32 @@
 package v1;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class StartScreen extends JPanel {
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class StartScreen extends JPanel 
+{
 	private JButton nouveau_jeu=new JButton("Start Game");
-	public StartScreen(JFrame f){
+	public StartScreen(MainWindow f)
+	{
 		super();
-		this.nouveau_jeu.addActionListener(new chgScr(f,new Jeu()));
-		setLayout(new BorderLayout());
+		nouveau_jeu.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				f.preinti();
+			}
+		});
+		
+		this.setLayout(new BorderLayout());
 		JLabel image = new JLabel(new ImageIcon("titre.jpeg") );
 		JLabel ct = new JLabel("© C. ABGRALL, R. CABALL, A. KIRCHER, B. LOLLIVIER - 2015");
 		JPanel ctf= new JPanel();
 		ctf.add("CENTER",ct);
-	    add("North",image);
-		add("Center",nouveau_jeu);
-		add("South",ctf);
+		this.add("North",image);
+		this.add("Center",nouveau_jeu);
+		this.add("South",ctf);
 	}
 }
