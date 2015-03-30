@@ -18,7 +18,14 @@ public class MainWindow extends JFrame
 	Button plateauB2[][];
 	JButton button_launch;
 	private OptionWindow fenOp;
+	//private StartScreen fenStart;
 	private boolean choix_bateau;
+	
+	
+	
+	
+	
+	
 	public MainWindow(Plateau plateau1, Plateau plateau2)
 	{
 		this.matrice1 = plateau1;
@@ -26,10 +33,18 @@ public class MainWindow extends JFrame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setTitle("BattleShip");
 		this.setSize(1200, 600);
-		fenOp = new OptionWindow(this);
-		//this.init();
-
+		this.setContentPane(new StartScreen(this));
+		this.pack();
 	}
+	
+	public void preinti()
+	{
+		this.getContentPane().removeAll();
+		fenOp = new OptionWindow(this);
+		this.revalidate();
+	}
+	
+	
 	
 	public void init() 
 	{
