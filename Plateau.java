@@ -15,19 +15,20 @@ this.nbligne = nbligne;
 this.nbcolonne = nbcolonne;
 CASES = new int[nbligne][nbcolonne]; //initialisation de la matrice bateaux
 bateaux = new Boat[1]; //initialisation de la matrice bateaux (13 utilisé par la suite)
-Boat bateau1 = new Boat(4,1,2,2,"Titanic");
+Boat bateau1 = new Boat(4,1,2,3,"Titanic");
 for (int i=0;i<bateau1.getSize();i++)
 	{
-	CASES [bateau1.get_xDebut()+i*bateau1.getDirection()] [bateau1.get_yDebut()+i*(1-bateau1.getDirection())]=2;
+	CASES [bateau1.get_yDebut()-1+i*(1-bateau1.getDirection())] [bateau1.get_xDebut()-1+i*(bateau1.getDirection())]=2;
 	}
 bateaux[0]=bateau1; //le bateau1 est un test
 }
 
 public void add_boat (Boat b) //ajoute un bateau sur le plateau erreur si deux bateaux sont au même endroit
 {
+System.out.println(bateaux.length);
 for (int i=0;i<b.getSize();i++)
 	{
-	CASES [b.get_xDebut()+i*b.getDirection()] [b.get_yDebut()+i*(1-b.getDirection())]=2; //On incrémente l'abscisse si horizontal et l'ordonnée si vertical, pour remplir la matrice BATEAUX
+	CASES [b.get_yDebut()-1+i*(1-b.getDirection())] [b.get_xDebut()-1+i*(b.getDirection())]=2; //On incrémente l'abscisse si horizontal et l'ordonnée si vertical, pour remplir la matrice BATEAUX
 	}
 Boat bato [];
 bato = bateaux;
@@ -40,8 +41,10 @@ bateaux = new Boat[l+1]; //initialisation de la matrice bateaux
 for(int n=0;n<l;n++)
 	{
 	bateaux[n]=bato[n];
-	bateaux[l]=b;
 	}
+bateaux[l]=b;
+System.out.println("Vous avez ajouté un bateau");
+System.out.println(bateaux.length);
 }
 
 public void jouer(int N)
@@ -77,7 +80,7 @@ if(CASES[i][j]==2)
 		int s = b.getSize();
 		for (int k=0;k<s;k++)
 		{
-		if((b.get_xDebut()+k*(1-b.getDirection()))==j & (b.get_yDebut()+k*(b.getDirection()))==i) //testé et approuvé
+		if((b.get_yDebut()-1+k*(1-b.getDirection()))==i & (b.get_xDebut()-1+k*(b.getDirection()))==j) //testé et approuvé
 			{
 			String n = bateaux[p].getNom();
 			System.out.println("Vous avez touché le bateau : "+n);
