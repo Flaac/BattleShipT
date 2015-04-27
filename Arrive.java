@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
+import.javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EtchedBorder;
@@ -25,7 +26,7 @@ import plateauServeur.IServeur;
 class  Arrive extends JPanel implements IArrive {
    private IServeur serveur = null;
    private int ID;
-   private String pseudo = "random"; 
+   private String pseudo = "Inconnu"; 
    private boolean first_chat = false;
    private boolean is_ready_toplay = false;
    private int[][] plateau_perso;
@@ -158,8 +159,8 @@ Arrive(IServeur serveur)
 		pane_east.setLayout(new BorderLayout());
 		pane_east_south.setLayout(new FlowLayout());
 		JButton button_submit = new JButton("Submit");
-		JTextArea zone_submit = new JTextArea(2,33);
-		zone_submit.append("Pseudo");
+		JTextField zone_submit = new JTextField(33);
+		zone_submit.setText("Pseudo");
 		JScrollPane scroll = new JScrollPane(zone_chat);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         zone_chat.setEditable(false);
@@ -169,7 +170,7 @@ Arrive(IServeur serveur)
 		pane_east.add("Center",scroll);
 		pane_east.add("South",pane_east_south);
 		pane_east.setBorder(new TitledBorder(new EtchedBorder(), "Chat Area"));
-		button_submit.addActionListener(new ActionListener()
+		ActionListener send= new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -197,7 +198,9 @@ Arrive(IServeur serveur)
 				}
 
 			}
-		});
+		}
+		zone_submit.addActionListener(send);
+		button_submit.addActionListener(send);
 
 		
 		//Final
@@ -467,7 +470,7 @@ Arrive(IServeur serveur)
 		pane_east.setLayout(new BorderLayout());
 		pane_east_south.setLayout(new FlowLayout());
 		JButton button_submit = new JButton("Submit");
-		JTextArea zone_submit = new JTextArea(2,33);;
+		JTextField zone_submit = new JTextField(33);
 		JScrollPane scroll = new JScrollPane(zone_chat);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         zone_chat.setEditable(false);
@@ -476,7 +479,7 @@ Arrive(IServeur serveur)
 		pane_east.add("Center",scroll);
 		pane_east.add("South",pane_east_south);
 		pane_east.setBorder(new TitledBorder(new EtchedBorder(), "Chat Area"));
-		button_submit.addActionListener(new ActionListener()
+		ActionListener send= new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
 			{
@@ -504,7 +507,9 @@ Arrive(IServeur serveur)
 				}
 
 			}
-		});
+		}
+		zone_submit.addActionListener(send);
+		button_submit.addActionListener(send);
 	}
 	
 	public void pane_west_setup()
@@ -519,16 +524,16 @@ Arrive(IServeur serveur)
 		JSpinner spin_nb_boat = new JSpinner(model1);
 		JLabel label_nb_boat = new JLabel("Nb de bateaux : ");
 		spin_nb_boat.setPreferredSize(new Dimension(80,20));
-		JSpinner spin_boat1 = new JSpinner(new SpinnerNumberModel(2.0, 2.0, 5.0, 1.0));
+		JSpinner spin_boat1 = new JSpinner(new SpinnerNumberModel(5.0, 2.0, 5.0, 1.0));
 		JLabel label_boat1 = new JLabel("Taille bateau 1 :  ");
 		spin_nb_boat.setPreferredSize(new Dimension(80,20));
-		JSpinner spin_boat2 = new JSpinner(new SpinnerNumberModel(2.0, 2.0, 5.0, 1.0));
+		JSpinner spin_boat2 = new JSpinner(new SpinnerNumberModel(4.0, 2.0, 5.0, 1.0));
 		JLabel label_boat2 = new JLabel("Taille bateau 2 : ");
 		spin_nb_boat.setPreferredSize(new Dimension(80,20));
-		JSpinner spin_boat3 = new JSpinner(new SpinnerNumberModel(2.0, 2.0, 5.0, 1.0));
+		JSpinner spin_boat3 = new JSpinner(new SpinnerNumberModel(3.0, 2.0, 5.0, 1.0));
 		JLabel label_boat3 = new JLabel("Taille bateau 3 : ");
 		spin_nb_boat.setPreferredSize(new Dimension(80,20));
-		JSpinner spin_boat4 = new JSpinner(new SpinnerNumberModel(2.0, 2.0, 5.0, 1.0));
+		JSpinner spin_boat4 = new JSpinner(new SpinnerNumberModel(3.0, 2.0, 5.0, 1.0));
 		JLabel label_boat4 = new JLabel("Taille bateau 4 : ");
 		JSpinner spin_boat5 = new JSpinner(new SpinnerNumberModel(2.0, 2.0, 5.0, 1.0));
 		JLabel label_boat5 = new JLabel("Taille bateau 5 : ");
